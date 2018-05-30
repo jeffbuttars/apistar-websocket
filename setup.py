@@ -36,6 +36,7 @@ setup(
     description='WebSocket Component for API Star',
     long_description=get_long_description('README.md'),
     long_description_content_type='text/markdown',
+    packages=['apistar_websocket'],
     author='Jeff Buttars',
     author_email='jeff@jeffbuttars.com',
     install_requires=[

@@ -18,7 +18,6 @@
 
 Easy WebSocket component for API Star and Uvicorn.
 
-
 * [Features](#features)
 * [Install](#install)
 * [Examples](#examples)

@@ -118,9 +118,6 @@ class WebSocket(object):
         self.asgi_receive = asgi_receive
 
         # UVicorn specific, get the WebSocketRequest instance
-        print('WS asgi_send scope', asgi_scope)
-        print('WS asgi_send', asgi_send, dir(asgi_send))
-
         # This will blow up under the debug server, so we'll fake it, I guess?
         try:
             self._ws_request = asgi_send.__self__

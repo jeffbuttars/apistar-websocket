@@ -192,19 +192,12 @@ class WebSocketAutoHook():
             await ws.connect()
 
     async def on_response(self, ws: WebSocket, response: Response, scope: ASGIScope):
-        if ws.scope.get('type') == 'websocket':
-            if ws.is_open:
-                scope['raise_exceptions'] = True
-                await ws.close(data=response.content if response else None)
+        if scope.get('type') == 'websocket' and ws.is_open:
+            await ws.close(data=response.content if response else None)
 
-            # Go for the inner exception by always raising for websocket
-            raise WebSocketClosed()
-
-    async def on_error(self, ws: WebSocket, response: Response):
-        if ws.scope.get('type') == 'websocket':
-            if ws.is_open:
-                await ws.close(data=response.content if response else None)
-                raise WebSocketClosed()
+    async def on_error(self, ws: WebSocket, response: Response, scope: ASGIScope):
+        if scope.get('type') == 'websocket' and ws.is_open:
+            await ws.close(data=response.content if response else None)
 
 
 class WebSocketComponent(Component):
